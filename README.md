@@ -1,16 +1,16 @@
-# Weather Information API (Spring Boot)
+# Weather Info for Pincode API (Spring Boot)
 
-This project provides a REST API to retrieve weather information for a specific day and pincode. The API allows you to save the pincode's latitude and longitude separately and store the weather information in a relational database (RDBMS) for optimized API calls in the future. It is implemented using Spring Boot framework.
+This project provides a REST API to retrieve weather information for a particular day and a pincode. The API allows you to save the pincode's latitude and longitude separately and store the weather information in a relational database (RDBMS) for optimized API calls in the future. It is implemented using Spring Boot framework.
 
 ## Installation
 
 1. Clone the repository:
 
    ```
-   git clone https://github.com/lakshaysangwan/weather-for-pincode.git
+   git clone https://github.com/kediasparsh/openweatherapi-wrapper.git
    ```
 
-2. Import the project into your preferred IDE (e.g., IntelliJ, Eclipse).
+2. Import the project into your preferred IDE.
 
 3. Build the project using Maven or your IDE's build feature.
 
@@ -25,6 +25,7 @@ This project provides a REST API to retrieve weather information for a specific 
    - If using Maven, run `mvn spring-boot:run` from the project's root directory.
 
 6. The application should now be running on `http://localhost:8080`.
+7. Sign in on `https://home.openweathermap.org/users/sign_in` and replace the `openWeatherMapAPIKey` String with the appropriate value in the `WeatherService.java` file.
 
 ## API Usage
 
@@ -33,14 +34,12 @@ This project provides a REST API to retrieve weather information for a specific 
 #### Request
 
 ```
-POST /weather
-Content-Type: application/json
+GET /weather
+Query Params
 
-{
-  "pincode": 122002,
-  "for_date": "2020-10-15"
-}
-
+Key                         Value
+pincode                     395007
+for_date                    2024-02-05
 ```
 
 Parameters:
@@ -51,72 +50,35 @@ Parameters:
 
 ```json
 {
-    "message": "Success",
-    "weather_data": {
-        "lat": 28.4628,
-        "lon": 77.0895,
-        "data": [
-            {
-                "dt": 1602720000,
-                "temp": 300.28,
-                "clouds": 40,
-                "sunset": 1602764534,
-                "sunrise": 1602723132,
-                "weather": [
-                    {
-                        "id": 721,
-                        "icon": "50n",
-                        "main": "Haze",
-                        "description": "haze"
-                    }
-                ],
-                "humidity": 36,
-                "pressure": 994,
-                "wind_deg": 0,
-                "dew_point": 283.93,
-                "feels_like": 299.91,
-                "visibility": 2200,
-                "wind_speed": 0
-            }
-        ],
-        "timezone": "Asia/Kolkata",
-        "timezone_offset": 19800
-    }
+    "id": 1,
+    "pincode": 395007,
+    "temperature": 293.17,
+    "pressure": 1015,
+    "humidity": 39,
+    "description": "few clouds"
 }
 ```
 
 ## Database Schema
 
-The database schema consists of three tables:
+The database schema consists of two tables: `http://localhost:8080/h2`
 
-### geocoded_data
+### location
 
 | Column     | Type        | Description                            |
 | ---------- | ----------- | -------------------------------------- |
-| latitude   | float       | The latitude of the pincode's location  |
-| longitude  | float       | The longitude of the pincode's location |
-| pin_code   | int         | The pincode associated with the location|
-| id         | bigint      | Primary key                            |
-| name       | varchar(255)| Optional name for the location          |
+| latitude   | Double       | The latitude of the pincode's location  |
+| longitude  | Double       | The longitude of the pincode's location |
+| pincode   | int         | The pincode associated with the location|
 
-### requests_logging
-
-| Column     | Type                  | Description                            |
-| ---------- | --------------------- | -------------------------------------- |
-| pin_code   | int                   | The pincode associated with the request |
-| created_at | datetime(6)           | The timestamp of the request            |
-| id         | bigint                | Primary key                            |
-| date       | varchar(255)          | The specific date for the request       |
-
-### unique_weather_record
+### weather
 
 | Column        | Type         | Description                                |
 | ------------- | ------------ | ------------------------------------------ |
-| pincode       | int          | The pincode associated with the weather record |
-| id            | bigint       | Primary key                                |
-| api_response  | json         | The weather API response in JSON format    |
-| date          | varchar(255) | The specific date of the weather record     |
-
-## Contributing
-
-If you want to contribute to this project, please follow
+| date       | LocalDate          | The specific date for the request |
+| humidity            | int       | Humidity, %                                |
+| id  | int         | Primary key    |
+| pincode          | int | The pincode associated with the request     |
+| pressure          | int | Atmospheric pressure on the sea level, hPa     |
+| temperature          | double | Temperature     |
+| description          | String | Weather condition     |
