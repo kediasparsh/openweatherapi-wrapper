@@ -52,6 +52,7 @@ Parameters:
 {
     "id": 1,
     "pincode": 395007,
+    "date": "2024-02-05",
     "temperature": 293.17,
     "pressure": 1015,
     "humidity": 39,
