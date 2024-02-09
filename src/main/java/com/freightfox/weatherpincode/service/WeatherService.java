@@ -24,7 +24,7 @@ public class WeatherService {
     private LocationRepository locationRepository;
 
     private RestTemplate restTemplate = new RestTemplate();
-    private final String openWeatherMapAPIKey = "aae4fbd520364da73408fb7e5ba65ad4";
+    private final String openWeatherMapAPIKey = "aae4fbd520364da73408fb##########";
 
     public Weather saveWeather(Weather weather) {
         return weatherRepository.save(weather);
