@@ -22,7 +22,7 @@ This project provides a REST API to retrieve weather information for a particula
 5. Run the application:
 
    - If using an IDE, run the main application class.
-   - If using Maven, run `mvn spring-boot:run` from the project's root directory.
+   - If using Maven, run `mvn clean spring-boot:run` from the project's root directory.
 
 6. The application should now be running on `http://localhost:8080`.
 7. Sign in on `https://home.openweathermap.org/users/sign_in` and replace the `openWeatherMapAPIKey` String with the appropriate value in the `WeatherService.java` file.
@@ -40,6 +40,8 @@ Query Params
 Key                         Value
 pincode                     395007
 for_date                    2024-02-05
+
+Warning: The API call accesses the current weather data for the above pincode. For weather data for the above date, a nominal fee is required.
 ```
 
 Parameters:
